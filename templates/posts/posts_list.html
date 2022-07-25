@@ -21,12 +21,14 @@
 {% if posts %}
     {% for post in posts %}
     <div class="card mb-4">
-        <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
+        {% if post.featured_image %}
+            <img class="card-img-top" src="{{ post.featured_image.url }}" style="max-height:300px; object-fit: cover; object-position: 0 0;"/>
+        {% endif %}        
         <div class="card-body">
             <div> <span class="small text-muted ">{{ post.date |date:'d M Y' }} | Автор: {{post.author}} | {{post.get_category_display}}</span></div>
             <a href="{% url 'post' post.id %}"><h2 class="card-title">{{ post.title }}</h2></a>
             <div class="card-text">
-                {{ post.text | truncatechars:250 | safe }}
+                {{ post.featured_text | truncatechars:250 | safe }}
             </div>
         </div>
     </div>

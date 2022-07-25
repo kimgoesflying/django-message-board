@@ -3,3 +3,4 @@ python-dotenv
 django-debug-toolbar
 django_filter
 django-ckeditor
+Pillow
