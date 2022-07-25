@@ -5,7 +5,7 @@
 {% endblock title %}
 
 {% block content %}
-    <div class="card mb-4">
+    <div class="card mb-2">
         <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
         <div class="card-body">
             <div> <span class="small text-muted ">{{ post.date |date:'d M Y' }} | Автор: {{post.author}} | {{post.get_category_display}}</span></div>
@@ -15,4 +15,9 @@
         </div>
     </div>
 
+    <div class="card pt-4 px-4 pb-2 mb-4">
+        <p>
+            <a href="{% url 'post_update' post.id %}" class="btn btn-outline-primary btn-sm">Редактировать</a>
+        </p>
+    </div>  
 {% endblock content %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import *
 from .filters import PostFilter
 from .forms import PostForm
@@ -34,3 +34,12 @@ class PostCreateView(CreateView):
     template_name = 'posts/post_create.html'
     form_class = PostForm
     success_url = '/'
+
+
+class PostUpdateView(UpdateView):
+    template_name = 'posts/post_update.html'
+    form_class = PostForm
+
+    def get_object(self, **kwargs):
+        id = self.kwargs.get('pk')
+        return Post.objects.get(pk=id)

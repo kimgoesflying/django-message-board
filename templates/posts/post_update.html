@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+
+{% block title %} Редактировать объявление {% endblock title %}
+
+{% block content %}
+
+<div class="card mb-4">
+    <div class="container my-4">
+        <div class="row">
+            <h1>Редактировать объявление</h1>
+            <hr>
+            <div class="form-group">
+                <form method="POST">
+                    {% csrf_token %} 
+                    {{ form.as_p}} 
+                    <input type="submit" value="Сщхранить объявление" class="btn btn-primary btn-sm">
+                    <a href="{% url 'post' post.id %}" class="btn btn-secondary btn-sm" role="button">Отмена</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
