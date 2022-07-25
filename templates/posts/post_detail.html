@@ -18,6 +18,7 @@
     <div class="card pt-4 px-4 pb-2 mb-4">
         <p>
             <a href="{% url 'post_update' post.id %}" class="btn btn-outline-primary btn-sm">Редактировать</a>
+            <a href="{% url 'post_delete' post.id %}" class="btn btn-outline-danger btn-sm">Удалить</a>
         </p>
     </div>  
 {% endblock content %}

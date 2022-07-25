@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import *
 from .filters import PostFilter
 from .forms import PostForm
@@ -43,3 +43,9 @@ class PostUpdateView(UpdateView):
     def get_object(self, **kwargs):
         id = self.kwargs.get('pk')
         return Post.objects.get(pk=id)
+
+
+class PostDeleteView(DeleteView):
+    template_name = 'posts/post_delete.html'
+    queryset = Post.objects.all()
+    success_url = '/'
