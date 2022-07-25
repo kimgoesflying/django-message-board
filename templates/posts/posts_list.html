@@ -25,9 +25,9 @@
         <div class="card-body">
             <div> <span class="small text-muted ">{{ post.date |date:'d M Y' }} | Автор: {{post.author}} | {{post.get_category_display}}</span></div>
             <a href="{% url 'post' post.id %}"><h2 class="card-title">{{ post.title }}</h2></a>
-            
-            <p class="card-text">{{ post.text | truncatechars:250 }}</p>
-            <!-- <a class="btn btn-secondary bg-opacity-10" href="#!">Read more →</a> -->
+            <div class="card-text">
+                {{ post.text | truncatechars:250 | safe }}
+            </div>
         </div>
     </div>
     {% endfor %}

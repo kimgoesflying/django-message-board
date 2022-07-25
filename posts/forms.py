@@ -1,5 +1,7 @@
 from django import forms
 from .models import Post
+from ckeditor_uploader.fields import RichTextUploadingField
+from ckeditor.widgets import CKEditorWidget
 
 
 class PostForm(forms.ModelForm):
@@ -12,7 +14,7 @@ class PostForm(forms.ModelForm):
             'author': forms.Select(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'text': forms.Textarea(attrs={'class': 'form-control'}),
+            'text': CKEditorWidget(),
         }
 
         labels = {

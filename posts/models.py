@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Post(models.Model):
@@ -22,7 +24,7 @@ class Post(models.Model):
     date = models.DateTimeField(verbose_name='Дата', default=timezone.now)
     category = models.CharField(max_length=6, choices=POST_TYPE, default='tnk')
     title = models.CharField(max_length=100)
-    text = models.TextField()
+    text = RichTextUploadingField(blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse('post', kwargs={'pk': self.pk})
