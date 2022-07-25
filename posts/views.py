@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from .models import *
 from .filters import PostFilter
+from .forms import PostForm
 # Create your views here.
 
 
@@ -27,3 +28,9 @@ class PostDetail(DetailView):
     model = Post
     template_name = 'posts/post_detail.html'
     context_object_name = 'post'
+
+
+class PostCreateView(CreateView):
+    template_name = 'posts/post_create.html'
+    form_class = PostForm
+    success_url = '/'

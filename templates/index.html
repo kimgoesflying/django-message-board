@@ -17,18 +17,14 @@
                 <a class="navbar-brand" href="/">Доска объявлений</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <button class="btn btn-outline-success" type="submit">Добавить</button>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-nav-scroll">
+                        <li class="nav-item"><a href="{% url 'post_create' %}" class="btn btn-secondary" role="button">Добавить</a></li>
                         <li class="nav-item">
                             <a class="nav-link" href="#!">Регистрация</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#!">Вход</a>
                         </li>
-                        <!-- <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li> -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Автор
@@ -36,7 +32,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#"><span class="nav-text">Отклики</span></a>
                                 </li>
-                                <!-- <li><hr class="dropdown-divider"></li> -->
+                                <li><hr class="dropdown-divider"></li>
                                 <li class="nav-text"><a class="dropdown-item" href="#">Выход </a>
                                 </li>
                             </ul>
