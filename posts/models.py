@@ -3,6 +3,8 @@ from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
+from allauth.account.forms import SignupForm
+from django.contrib.auth.models import Group
 
 
 class Post(models.Model):
@@ -56,3 +58,12 @@ class Reply(models.Model):
     class Meta:
         verbose_name = 'Отклик'
         verbose_name_plural = 'Отклики'
+
+
+class CommonSignupForm(SignupForm):
+
+    def save(self, request):
+        user = super(CommonSignupForm, self).save(request)
+        common_group = Group.objects.get(name='common')
+        common_group.user_set.add(user)
+        return user
