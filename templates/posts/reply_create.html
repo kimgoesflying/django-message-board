@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% block title %}Оставть отклик{% endblock title %}
+
+{% block content %}
+
+<div class="card mb-4">
+    <div class="container my-4">
+        <div class="row">
+        <h1>Оставть отклик</h1>
+        <hr>
+            <div class="form-group">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p}} 
+                    <input type="submit" value="Оставть отклик" class="btn btn-primary btn-sm">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -31,26 +31,27 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post', kwargs={'pk': self.pk})
 
+    def __str__(self):
+        return f'{self.title}'
+
     class Meta:
         verbose_name = 'Объявление'
         verbose_name_plural = 'Объявления'
 
 
 class Reply(models.Model):
-    STATUS = (
-        ('wt', 'Ожидает'),
-        ('ac', 'Принято'),
-        ('dc', 'Отклонено'),
-    )
-
-    date = models.DateTimeField(auto_now_add=True)
+    post = models.ForeignKey(
+        Post, related_name='replies', on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    status = models.CharField(max_length=2, choices=STATUS, default='wt')
+    status = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
         return reverse('response_detail', kwargs={'pk': self.pk})
+
+    def __str__(self):
+        return f'{self.author} {self.post} {self.text}'
 
     class Meta:
         verbose_name = 'Отклик'

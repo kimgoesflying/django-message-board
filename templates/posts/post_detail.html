@@ -10,17 +10,43 @@
             <img class="card-img-top" src="{{ post.featured_image.url }}" style="max-height:300px; object-fit: cover; object-position: 0 0;"/>
         {% endif %}
             <div class="card-body">
-            <div> <span class="small text-muted ">{{ post.date |date:'d M Y' }} | Автор: {{post.author}} | {{post.get_category_display}}</span></div>
+            <div> <span class="small text-muted ">{{ post.date | date:'d M Y' }} | Автор: {{post.author}} | {{post.get_category_display}}</span></div>
             <h2 class="card-title">{{ post.title }}</h2>
             <p class="card-text">{{ post.featured_text }}</p>
             <p class="card-text">{{ post.text | safe }}</p>
         </div>
     </div>
-
-    <div class="card pt-4 px-4 pb-2 mb-4">
+    
+    <div class="card pt-4 px-4 pb-2 mb-2">
         <p>
             <a href="{% url 'post_update' post.id %}" class="btn btn-outline-primary btn-sm">Редактировать</a>
             <a href="{% url 'post_delete' post.id %}" class="btn btn-outline-danger btn-sm">Удалить</a>
+            <a href="{% url 'reply_create' post.id %}" class="btn btn-outline-primary btn-sm">Оставить Отклик</a>
         </p>
-    </div>  
+    </div>
+    
+    <div class="card mb-4 ">
+            <div class="card-body">
+                <p class="card-title text-muted fs-4">ОТКЛИКИ</p>
+                <hr>
+                <!-- Comment form-->
+                <!-- <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form> -->
+
+                {% if not post.replies.all %}
+                <p>Нет откликов ...</p>
+                {% else %}
+                    {% for rep in post.replies.all %}
+                        <!-- Single comment-->
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"/></div>
+                            <div class="ms-3">
+                                <div><span class="fw-bold">{{ rep.author }}</span> <small class="text-muted">{{ rep.date | date:'d M Y' }}</small> </div>
+                                {{ rep.text }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+    </div>
+
 {% endblock content %}

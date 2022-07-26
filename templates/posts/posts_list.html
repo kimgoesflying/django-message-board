@@ -31,6 +31,9 @@
                 {{ post.featured_text | truncatechars:250 | safe }}
             </div>
         </div>
+        <div class="card-footer bg-white">
+            отклики: {{ post.replies.all.count }}
+        </div>
     </div>
     {% endfor %}
 

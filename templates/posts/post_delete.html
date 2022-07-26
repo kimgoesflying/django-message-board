@@ -20,6 +20,7 @@
 <form method="POST">
     {% csrf_token %}
     <input type="submit" value="Подтвердить" class="btn btn-danger btn-sm">
+    <a href="{% url 'post' post.id %}" class="btn btn-secondary btn-sm" role="button">Отмена</a>
 </form>
 </div>
 {% endblock content %} 
