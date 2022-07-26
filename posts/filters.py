@@ -1,22 +1,9 @@
-from django_filters import FilterSet, DateFilter, DateRangeFilter, ModelMultipleChoiceFilter
-from .models import Post
+from django_filters import FilterSet, BooleanFilter
+from .models import Post, Reply
 from django import forms
 
 
 class PostFilter(FilterSet):
-
-    # start_date = DateFilter(field_name='date', lookup_expr=(
-    #     'gt'), widget=forms.DateTimeInput(attrs={'type': 'date', 'class': 'form-control'}), label='от')
-
-    # end_date = DateFilter(field_name='date', lookup_expr=(
-    #     'lt'), widget=forms.DateTimeInput(attrs={'type': 'date', 'class': 'form-control'}), label='до')
-
-    # date = DateRangeFilter(label='Дата', widget=forms.Select(
-    #     attrs={'class': 'form-control'}))
-
-    # category = ModelMultipleChoiceFilter(queryset=Post.objects.all(),
-    #                                      widget=forms.CheckboxSelectMultiple(),  label='Категории')
-
     class Meta:
         model = Post
 
@@ -28,4 +15,23 @@ class PostFilter(FilterSet):
         super(PostFilter, self).__init__(*args, **kwargs)
         self.filters['category'].label = ""
         self.filters['category'].field.widget.attrs.update(
+            {'class': 'form-control'})
+
+
+class ReplyFilter(FilterSet):
+    answerd = BooleanFilter(field_name='status', label='Принято')
+
+    class Meta:
+        model = Reply
+
+        fields = [
+            'post',
+            'answerd'
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super(ReplyFilter, self).__init__(*args, **kwargs)
+        self.filters['post'].field.widget.attrs.update(
+            {'class': 'form-control'})
+        self.filters['answerd'].field.widget.attrs.update(
             {'class': 'form-control'})

@@ -51,7 +51,7 @@ class Reply(models.Model):
         return reverse('response_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return f'{self.author} {self.post} {self.text}'
+        return f'{self.author.id} {self.post} {self.text}'
 
     class Meta:
         verbose_name = 'Отклик'

@@ -5,7 +5,7 @@
 
 
 <form method="GET" id="my_form" >
-    <div class="mb-3 row">
+    <div class="mb-3 row align-items-center">
         <label class="col-sm-2 col-form-label">Категории:</label>
         {% for field in filter.form %}
         <div class="col-sm-8">{{ field }}</div>
@@ -15,9 +15,7 @@
         </div>
       </div>
 </form>
-
 <hr>
-
 {% if posts %}
     {% for post in posts %}
     <div class="card mb-4">
@@ -32,7 +30,7 @@
             </div>
         </div>
         <div class="card-footer bg-white">
-            отклики: {{ post.replies.all.count }}
+            <i class="far fa-comment" style="margin-right: 4px;"></i>  {{ post.replies.all.count }}
         </div>
     </div>
     {% endfor %}

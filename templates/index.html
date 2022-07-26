@@ -17,26 +17,35 @@
                 <a class="navbar-brand" href="/">Доска объявлений</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-nav-scroll">
-                        <li class="nav-item"><a href="{% url 'post_create' %}" class="btn btn-secondary" role="button">Добавить</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#!">Регистрация</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/accounts/login">Вход</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-user-circle"></i> Автор
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#"><span class="nav-text">Отклики</span></a>
+                    <ul class="navbar-nav ms-auto navbar-nav-scroll align-items-center">
+                        <li class="nav-item"><a href="{% url 'post_create' %}" class="nav-link">Добавить</a></li>
+                        
+                        {% if user.is_authenticated %}
+                        <form method="post" action="{% url 'account_logout' %}">
+                            {% csrf_token %}
+                            {% if redirect_field_value %}
+                                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                            {% endif %}
+                                
+                                <li class="nav-item dropdown  align-items-center">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-user-circle" style=" margin-right: 6px;"></i>
+                                        
+                                        {{user.username}}
+                                        
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{% url 'replies' %}"><span class="nav-text">Отклики</span></a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><button class="dropdown-item" type="submit"><span class="nav-text">Выход</span></button></li>
+                                    </ul>
                                 </li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li class="nav-text"><a class="dropdown-item" href="#">Выход </a>
-                                </li>
-                            </ul>
-                        </li>
+                        </form>
+                            {% else %}
+                            <li class="nav-item"><a class="nav-link" href="/accounts/login"> <i class="fa fa-user-circle" style=" margin-right: 6px;"></i>Вход</a></li>
+                            {% endif %}
+
+
                     </ul>
                 </div>
             </div>
