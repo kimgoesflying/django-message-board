@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.shortcuts import redirect
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Reply
 from .filters import PostFilter, ReplyFilter
 from .forms import PostForm, ReplyForm
@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django_filters.views import FilterView
+from django.http import HttpResponseRedirect
 # Create your views here.
 
 
@@ -16,7 +17,7 @@ class PostListView(FilterView):
     template_name = 'posts/posts_list.html'
     context_object_name = 'posts'
     filterset_class = PostFilter
-    paginate_by = 2
+    paginate_by = 5
 
 
 class PostDetail(DetailView):
@@ -59,7 +60,7 @@ class ReplyListView(LoginRequiredMixin, FilterView):
     context_object_name = 'replies'
     template_name = 'posts/reply_list.html'
     filterset_class = ReplyFilter
-    paginate_by = 2
+    paginate_by = 10
 
     def get_queryset(self):
         return Reply.objects.filter(post__author_id=self.request.user).order_by("-date")
@@ -87,3 +88,15 @@ class ReplyDeleteView(LoginRequiredMixin, DeleteView):
     def get_object(self, **kwargs):
         id = self.kwargs.get('pk')
         return Reply.objects.get(pk=id)
+
+
+@login_required
+def AcceptReply(request, *args, **kwargs):
+    pk = kwargs.get('pk')
+    reply = Reply.objects.get(pk=pk)
+    reply.accept_reply()
+    return redirect('/replies')
+
+    # if reply.is_accepted:
+    #     send_mail_status.delay(reply.pk)
+    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

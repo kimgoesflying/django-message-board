@@ -19,7 +19,7 @@ class PostFilter(FilterSet):
 
 
 class ReplyFilter(FilterSet):
-    answerd = BooleanFilter(field_name='status', label='Принято')
+    answerd = BooleanFilter(field_name='is_accepted', label='Принято')
 
     class Meta:
         model = Reply

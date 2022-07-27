@@ -46,8 +46,12 @@ class Reply(models.Model):
         Post, related_name='replies', on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
-    status = models.BooleanField(default=False)
+    is_accepted = models.BooleanField(default=False)
     date = models.DateTimeField(auto_now_add=True)
+
+    def accept_reply(self):
+        self.is_accepted = True
+        self.save()
 
     def get_absolute_url(self):
         return reverse('response_detail', kwargs={'pk': self.pk})

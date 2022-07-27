@@ -34,7 +34,10 @@
         </div>
     </div>
     <div class="card-footer bg-white">
-        <a href="#" class="btn btn-outline-primary btn-sm">Принчть</a>
+        {% if not r.is_accepted %}
+        <a href="{% url 'reply_accept' r.id %}" class="btn btn-outline-primary btn-sm">Принчть</a>       
+        {% endif %}
+       
         <a href="{% url 'reply_delete' r.id %}" class="btn btn-outline-danger btn-sm">Удалить</a>
     </div>
 </div>

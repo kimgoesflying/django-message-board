@@ -14,14 +14,19 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(Reply)
 class ReplyAdmin(admin.ModelAdmin):
     ordering = ['-date']
-    list_display = ["get_title", "get_author", "status", 'date']
+    list_display = ["get_reply_author", "get_title",
+                    "get_post_author", "is_accepted", 'date']
     search_fields = ('post__title', )
-    list_filter = ["date", 'status', "post__author", ]
+    list_filter = ["date", 'is_accepted', ]
 
-    def get_author(self, obj):
+    def get_reply_author(self, obj):
+        return obj.author
+    get_reply_author.short_description = 'Авток отклика'
+
+    def get_post_author(self, obj):
         return obj.post.author
-    get_author.short_description = 'Post Author'
+    get_post_author.short_description = 'Автор объявления'
 
     def get_title(self, obj):
         return obj.post.title
-    get_title.short_description = 'Post Title'
+    get_title.short_description = 'заголовок объяыления'
