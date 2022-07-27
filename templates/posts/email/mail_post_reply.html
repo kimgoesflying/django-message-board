@@ -136,7 +136,7 @@
 									<tr>
 										<td class="article-content" style="padding: 0 0 15px 30px; text-align: left; ">
                                             <span style="font-size:small; color:grey">{{ post.date | date:'d M Y' }} | Автор: {{post.author}} | {{post.get_category_display}}</span>
-                                            <a href="{% url 'post' post.id %}"><h2>{{ post.title }}</h2></a>
+                                            <a href="{{url}}"><h2>{{ post.title }}</h2></a>
                                         </td>
 									</tr>
                                     <tr>

@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-		<title>Доска Объявлений - Отклик принят</title>
+		<title>Доска Объявлений - Новые объявления</title>
 
 		<link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Martel:400,700' rel='stylesheet' type='text/css'>
@@ -119,7 +119,7 @@
 								<table align="center" border="0" width="640" cellpadding="0" cellspacing="0" class="container" style="table-layout:fixed; width: 640px;">
 									<tr>
 										<td  width = "100%" colspan="4" class="header-title" style="padding: 70px 0 20px 0; font-weight: bold; font-size: 36px; font-family: 'Noto sans', sans-serif; text-align: left;">
-											Здравствуй, {{post.author}}.<br>Ваш отклик принят!
+											Здравствуй, {{username}}.<br>Новые объявленя!
 										</td>
 									</tr>
 									<tr style="padding-bottom:40px;">
@@ -133,33 +133,14 @@
 
 								<!-- Container 640px -->
 								<table align="center" border="0" width="640" cellpadding="0" cellspacing="0" class="container" style="width: 640px;">
-									<tr>
-										<td class="article-content" style="padding: 0 0 15px 30px; text-align: left; ">
+									{% for post in new_posts %}
+                                    <tr style="border-bottom: solid 1px lightgrey">
+										<td class="article-content" style="padding: 15px 0 15px 30px; text-align: left; ">
                                             <span style="font-size:small; color:grey">{{ post.date | date:'d M Y' }} | Автор: {{post.author}} | {{post.get_category_display}}</span>
-                                            <a href={{url}}><h2>{{ post.title }}</h2></a>
+                                            <a href="http://127.0.0.1:8000/post/{{post.id}}"><h2>{{ post.title }}</h2></a>
                                         </td>
 									</tr>
-                                    <tr>
-										<td bgcolor="#F8F9FA" style="padding: 15px 0 15px 30px; ">
-											<table class="container" align="left" border="0" width="50" cellpadding="0" cellspacing="0" style="width: 50px; ">
-											    <tr>
-                                                    <td class="article-thumb">
-                                                        <img style="border-radius: 50%;" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"/>
-                                                    </td>
-												</tr>
-											</table>
-				
-											<table class="container" align="left" border="0" width="300" cellpadding="0" cellspacing="0" style="width: 550px;">
-													<tr>
-														<td class="article-content" style="padding: 0 0 10px 17px; text-align: justify; ">														
-                                                           <span style="font-weight:bold">{{ reply.author }}</span> 
-                                                           <span style="font-size:small; color:grey">{{ reply.date | date:'d M Y' }}</span><br>
-                                                           {{ reply.text | linebreaks }}
-                                                        </td>
-													</tr>
-											</table>
-										</td>
-									</tr>
+                                    {% endfor %}
                                     <tr>
                                         <td>
                                             &nbsp;
