@@ -19,22 +19,23 @@
 </div>
 
 {% if replies %}
-{% for p in replies %}
+{% for r in replies %}
 
 <div class="card mb-4">
     <div class="card-body">
-        <div> <span class="small text-muted ">{{ p.post.date | date:'d M Y' }} | Автор: {{p.post.author}} | {{p.post.get_category_display}}</span></div>
-            <a href="{% url 'post' p.post.id %}"><h2 class="card-title">{{ p.post.title }}</h2></a>
+        <div> <span class="small text-muted ">{{ r.post.date | date:'d M Y' }} | Автор: {{r.post.author}} | {{r.post.get_category_display}}</span></div>
+            <a href="{% url 'post' r.post.id %}"><h2 class="card-title">{{ r.post.title }}</h2></a>
     </div>
     <div class="d-flex m-3 p-3 bg-light">
         <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"/></div>
         <div class="ms-3">
-            <div><span class="fw-bold">{{ p.author }}</span> <small class="text-muted">{{ p.date | date:'d M Y' }}</small> </div>
-            {{ p.text }}
+            <div><span class="fw-bold">{{ r.author }}</span> <small class="text-muted">{{ r.date | date:'d M Y' }}</small> </div>
+            {{ r.text }}
         </div>
     </div>
     <div class="card-footer bg-white">
-        <p>Принять | Удалить</p>
+        <a href="#" class="btn btn-outline-primary btn-sm">Принчть</a>
+        <a href="{% url 'reply_delete' r.id %}" class="btn btn-outline-danger btn-sm">Удалить</a>
     </div>
 </div>
 {% endfor %}

@@ -4,7 +4,7 @@ from .models import Post, Reply
 from .filters import PostFilter, ReplyFilter
 from .forms import PostForm, ReplyForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django_filters.views import FilterView
 # Create your views here.
@@ -25,7 +25,7 @@ class PostDetail(DetailView):
     context_object_name = 'post'
 
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     template_name = 'posts/post_create.html'
     form_class = PostForm
     success_url = reverse_lazy('posts')
@@ -36,7 +36,7 @@ class PostCreateView(CreateView):
         return response
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'posts/post_update.html'
     form_class = PostForm
 
@@ -45,7 +45,7 @@ class PostUpdateView(UpdateView):
         return Post.objects.get(pk=id)
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'posts/post_delete.html'
     queryset = Post.objects.all()
     success_url = reverse_lazy('posts')
@@ -55,7 +55,7 @@ class PostDeleteView(DeleteView):
         return Post.objects.get(pk=id)
 
 
-class ReplyListView(FilterView):
+class ReplyListView(LoginRequiredMixin, FilterView):
     context_object_name = 'replies'
     template_name = 'posts/reply_list.html'
     filterset_class = ReplyFilter
@@ -65,7 +65,7 @@ class ReplyListView(FilterView):
         return Reply.objects.filter(post__author_id=self.request.user).order_by("-date")
 
 
-class ReplayCreateView(CreateView):
+class ReplayCreateView(LoginRequiredMixin, CreateView):
     template_name = 'posts/reply_create.html'
     form_class = ReplyForm
 
@@ -77,3 +77,13 @@ class ReplayCreateView(CreateView):
 
     def get_success_url(self):
         return reverse_lazy('post', kwargs={'pk': self.object.post.id})
+
+
+class ReplyDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'posts/reply_delete.html'
+    queryset = Reply.objects.all()
+    success_url = reverse_lazy('replies')
+
+    def get_object(self, **kwargs):
+        id = self.kwargs.get('pk')
+        return Reply.objects.get(pk=id)

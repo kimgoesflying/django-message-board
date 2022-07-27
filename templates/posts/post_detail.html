@@ -19,8 +19,10 @@
     
     <div class="card pt-4 px-4 pb-2 mb-2">
         <p>
+            {% if user.is_authenticated %}
             <a href="{% url 'post_update' post.id %}" class="btn btn-outline-primary btn-sm">Редактировать</a>
             <a href="{% url 'post_delete' post.id %}" class="btn btn-outline-danger btn-sm">Удалить</a>
+            {% endif %}
             <a href="{% url 'reply_create' post.id %}" class="btn btn-outline-primary btn-sm">Оставить Отклик</a>
         </p>
     </div>
@@ -29,15 +31,11 @@
             <div class="card-body">
                 <p class="card-title text-muted fs-4">ОТКЛИКИ</p>
                 <hr>
-                <!-- Comment form-->
-                <!-- <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form> -->
-
                 {% if not post.replies.all %}
                 <p>Нет откликов ...</p>
                 {% else %}
                     {% for rep in post.replies.all %}
-                        <!-- Single comment-->
-                        <div class="d-flex mb-3">
+                        <div class="d-flex mb-3 p-3 bg-light">
                             <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"/></div>
                             <div class="ms-3">
                                 <div><span class="fw-bold">{{ rep.author }}</span> <small class="text-muted">{{ rep.date | date:'d M Y' }}</small> </div>
