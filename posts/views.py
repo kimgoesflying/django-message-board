@@ -10,7 +10,7 @@ from django_filters.views import FilterView
 from django.http import HttpResponseRedirect
 # Create your views here.
 
-from .tasks import send_mail_post_reply_task
+from .tasks import send_mail_post_reply_task, send_mail_accept_reply_task
 
 
 class PostListView(FilterView):
@@ -98,8 +98,8 @@ def AcceptReply(request, *args, **kwargs):
     pk = kwargs.get('pk')
     reply = Reply.objects.get(pk=pk)
     reply.accept_reply()
-    return redirect('/replies')
+    # return redirect('/replies')
 
-    # if reply.is_accepted:
-    #     send_mail_status.delay(reply.pk)
-    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    if reply.is_accepted:
+        send_mail_accept_reply_task.delay(pk)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

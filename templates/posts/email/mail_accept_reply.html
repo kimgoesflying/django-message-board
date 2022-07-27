@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+		<title>Доска Объявлений - Отклик принят</title>
+
+		<link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Martel:400,700' rel='stylesheet' type='text/css'>
+		<style type="text/css">
+			/* ----- Reset ----- */
+			html,
+			body{
+				margin: 0 !important;
+				padding: 0 !important;
+				height: 100% !important;
+				width: 100% !important;
+				font-family: 'Martel', sans-serif;
+			}
+
+			*{
+				-ms-text-size-adjust: 100%;
+				-webkit-text-size-adjust: 100%;
+			}
+
+			div[style*="margin: 16px 0"]{
+				margin: 0 !important;
+			}
+
+			table,
+			td{
+				mso-table-lspace: 0pt !important;
+				mso-table-rspace: 0pt !important;
+			}
+
+			table{
+				border-spacing: 0 !important;
+				border-collapse: collapse !important;
+				table-layout: fixed !important;
+				margin: 0 auto !important;
+			}
+
+			table table table{
+				table-layout: auto; 
+			}
+
+			img{
+				-ms-interpolation-mode: bicubic;
+			}
+
+			.yshortcuts a{
+				border-bottom: none !important;
+			}
+
+			.mobile-link--footer a,
+			a[x-apple-data-detectors]{
+				color:inherit !important;
+				text-decoration: underline !important;
+			}
+
+			@media (max-width: 700px){
+				/* ----- Grid ----- */
+				.container{
+					width: 100% !important;
+				}
+
+				.container-outer{
+					padding: 0 !important;
+				}
+
+				/* ----- Article ----- */
+				.article-thumb,
+				.article-title,
+				.article-content,
+				.article-button{
+					text-align: center !important;
+					padding-left: 15px !important;
+				}
+
+				.article-thumb{
+					padding: 30px 0 15px 0 !important;
+				}
+
+				.article-title{
+					padding: 0 0 15px 0 !important;
+				}
+
+				.article-content{
+					padding: 0 15px 0 15px !important;
+				}
+
+				.article-button{
+					padding: 20px 0 0 0 !important;
+				}
+
+				.article-button > table{
+					float: none;
+				}
+
+				/* ----- Footer ----- */
+				.footer-copy{
+					text-align: center !important;
+				}
+			}
+	</style>
+    </head>
+    <body style="margin: 0; padding: 0;" bgcolor="#f5f5f5" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+		<!-- Wrapper 100% -->
+		<table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" bgcolor="#f5f5f5">
+			<tr>
+				<td class="container-outer" align="center" valign="top" style="padding: 30px 0 30px 0;">
+					<!-- Container 700px -->
+					<table border="0" width="700" cellpadding="0" cellspacing="0" bgcolor="#ffffff" class="container" style="width: 700px;">
+						<tr>
+							<td style="border-top: 10px solid #212529">
+
+								<!-- Container 640px -->
+								<table align="center" border="0" width="640" cellpadding="0" cellspacing="0" class="container" style="table-layout:fixed; width: 640px;">
+									<tr>
+										<td  width = "100%" colspan="4" class="header-title" style="padding: 70px 0 20px 0; font-weight: bold; font-size: 36px; font-family: 'Noto sans', sans-serif; text-align: left;">
+											Здравствуй, {{post.author}}.<br>Ваш отклик принят!
+										</td>
+									</tr>
+									<tr style="padding-bottom:40px;">
+										<td  style=" border-top: 8px solid #212529; padding-bottom: 70px"></td>
+										<td   style="text-align: left;"></td>
+										<td   style="text-align: left;"></td>
+										<td   style="text-align: left;"></td>
+									</tr>
+								</table>
+								<!-- Container 640px End -->
+
+								<!-- Container 640px -->
+								<table align="center" border="0" width="640" cellpadding="0" cellspacing="0" class="container" style="width: 640px;">
+									<tr>
+										<td class="article-content" style="padding: 0 0 15px 30px; text-align: left; ">
+                                            <span style="font-size:small; color:grey">{{ post.date | date:'d M Y' }} | Автор: {{post.author}} | {{post.get_category_display}}</span>
+                                            <a href="{% url 'post' post.id %}"><h2>{{ post.title }}</h2></a>
+                                        </td>
+									</tr>
+                                    <tr>
+										<td bgcolor="#F8F9FA" style="padding: 15px 0 15px 30px; ">
+											<table class="container" align="left" border="0" width="50" cellpadding="0" cellspacing="0" style="width: 50px; ">
+											    <tr>
+                                                    <td class="article-thumb">
+                                                        <img style="border-radius: 50%;" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"/>
+                                                    </td>
+												</tr>
+											</table>
+				
+											<table class="container" align="left" border="0" width="300" cellpadding="0" cellspacing="0" style="width: 550px;">
+													<tr>
+														<td class="article-content" style="padding: 0 0 10px 17px; text-align: justify; ">														
+                                                           <span style="font-weight:bold">{{ reply.author }}</span> 
+                                                           <span style="font-size:small; color:grey">{{ reply.date | date:'d M Y' }}</span><br>
+                                                           {{ reply.text | linebreaks }}
+                                                        </td>
+													</tr>
+											</table>
+										</td>
+									</tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+								</table>
+								<!-- Container 640px End -->
+
+								<!-- Container 700px -->
+								<table align="center" border="0" width="700" cellpadding="0" cellspacing="0" class="container" style="width: 700px; background-color: #212529;">
+									<tr>
+										<td style="padding: 30px 0 30px 0;">
+											<table class="container" align="cemter" width="225" border="0" cellpadding="0" cellspacing="0" style="width: 225px;">
+												<tr>
+													<td class="footer-copy" style="text-transform: uppercase; text-align: center; font-size: 10px; color: #ffffff; font-weight:bold; font-family: 'Noto sans', sans-serif;">Доска Объявлений © 2022.</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+								<!-- Container 640px End -->
+							</td>
+						</tr>
+					</table>
+					<!-- Container 700px End -->
+				</td>
+			</tr>
+		</table>
+		<!-- Wrapper 100% End -->
+	</body>
+</html>
