@@ -1,15 +1,13 @@
-from django.shortcuts import redirect
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, Reply
-from .filters import PostFilter, ReplyFilter
-from .forms import PostForm, ReplyForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django_filters.views import FilterView
 from django.http import HttpResponseRedirect
-# Create your views here.
 
+from .models import Post, Reply
+from .filters import PostFilter, ReplyFilter
+from .forms import PostForm, ReplyForm
 from .tasks import send_mail_post_reply_task, send_mail_accept_reply_task
 
 
@@ -98,8 +96,6 @@ def AcceptReply(request, *args, **kwargs):
     pk = kwargs.get('pk')
     reply = Reply.objects.get(pk=pk)
     reply.accept_reply()
-    # return redirect('/replies')
+    send_mail_accept_reply_task.delay(pk)
 
-    if reply.is_accepted:
-        send_mail_accept_reply_task.delay(pk)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
