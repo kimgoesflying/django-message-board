@@ -5,3 +5,5 @@ django_filter
 django-ckeditor
 Pillow
 django-allauth
+celery
+redis

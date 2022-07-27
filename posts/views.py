@@ -10,6 +10,8 @@ from django_filters.views import FilterView
 from django.http import HttpResponseRedirect
 # Create your views here.
 
+from .tasks import send_mail_post_reply_task
+
 
 class PostListView(FilterView):
     model = Post
@@ -74,6 +76,7 @@ class ReplayCreateView(LoginRequiredMixin, CreateView):
         form.instance.post_id = self.kwargs['pk']
         form.instance.author_id = self.request.user.id
         response = super().form_valid(form)
+        send_mail_post_reply_task.delay(self.object.pk)
         return response
 
     def get_success_url(self):

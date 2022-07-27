@@ -10,7 +10,7 @@
         <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"/></div>
         <div class="ms-3">
             <div><span class="fw-bold">{{ reply.author }}</span> <small class="text-muted">{{ reply.date | date:'d M Y' }}</small> </div>
-            {{ reply.text }}
+            {{ reply.text | linebreaks }}
         </div>
     </div>
     </div>

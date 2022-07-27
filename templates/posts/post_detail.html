@@ -39,7 +39,7 @@
                             <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"/></div>
                             <div class="ms-3">
                                 <div><span class="fw-bold">{{ rep.author }}</span> <small class="text-muted">{{ rep.date | date:'d M Y' }}</small> </div>
-                                {{ rep.text }}
+                                {{ rep.text | linebreaks }}
                             </div>
                         </div>
                     {% endfor %}
